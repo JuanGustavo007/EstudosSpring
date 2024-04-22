@@ -5,6 +5,7 @@ import com.devsupeior.dscommerce.dto.ProductDto;
 import com.devsupeior.dscommerce.entities.Product;
 import com.devsupeior.dscommerce.repositories.ProductRepository;
 import com.devsupeior.dscommerce.services.ProductService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +39,7 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<ProductDto> insert(@RequestBody ProductDto productDto){
+    public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto productDto){
         productDto = productService.insert(productDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productDto.getId()).toUri();
         return ResponseEntity.created(uri).body(productDto);
@@ -46,10 +47,8 @@ public class ProductController {
 
 
 
-
-
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto productDto){ // Recebe um id e um corpo
+    public ResponseEntity<ProductDto> update(@PathVariable Long id,@Valid @RequestBody ProductDto productDto){ // Recebe um id e um corpo
         productDto = productService.update(id, productDto);// Manda o DTO e o ID para a camada de servico, que faz a consulta
         return ResponseEntity.ok(productDto); // Retorna uma response para o usuario
     }
