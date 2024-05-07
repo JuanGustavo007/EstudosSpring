@@ -37,7 +37,7 @@ public class ProductController {
         return ResponseEntity.ok(productDto);
     }
 
-
+    //Insere recurso
     @PostMapping
     public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto productDto){
         productDto = productService.insert(productDto);
@@ -46,13 +46,14 @@ public class ProductController {
     }
 
 
-
+    // Atualizacao
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDto> update(@PathVariable Long id,@Valid @RequestBody ProductDto productDto){ // Recebe um id e um corpo
         productDto = productService.update(id, productDto);// Manda o DTO e o ID para a camada de servico, que faz a consulta
         return ResponseEntity.ok(productDto); // Retorna uma response para o usuario
     }
 
+    //Deleta recurso
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){ // Recebe um id
         productService.delete(id);
