@@ -1,8 +1,10 @@
 package com.devsupeior.dscommerce.services;
 
 
+import com.devsupeior.dscommerce.dto.CategoryDto;
 import com.devsupeior.dscommerce.dto.ProductDto;
 import com.devsupeior.dscommerce.dto.ProductMinDto;
+import com.devsupeior.dscommerce.entities.Category;
 import com.devsupeior.dscommerce.entities.Product;
 import com.devsupeior.dscommerce.repositories.ProductRepository;
 import com.devsupeior.dscommerce.services.exceptions.DatabaseException;
@@ -78,6 +80,21 @@ public class ProductService {
             throw new DatabaseException("Falha na integridade referencial");
         }
         productRepository.deleteById(id);
+    }
+
+    private void copyDtoToEntity(ProductDto dto, Product entity) {
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImgUrl());
+        entity.getCategories().clear();
+        for(CategoryDto categoryDto : dto.getCategories()) {
+            Category category = new Category();
+            category.setId(categoryDto.getId());
+            entity.getCategories().add(category);
+
+        }
+
     }
 }
 
