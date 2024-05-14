@@ -18,6 +18,7 @@ public class ValidationError extends CustomError{
     }
 
     public void addError(String fieldName,  String message){
+        erros.removeIf(err -> err.getFieldName().equals(fieldName));
         erros.add(new FieldMessage(fieldName, message));
     }
 }

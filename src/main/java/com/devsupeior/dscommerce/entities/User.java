@@ -13,7 +13,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
 
     @Column(unique = true) //Valores unicos para email
@@ -127,14 +127,7 @@ public class User implements UserDetails {
         return orders;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
-        return id == user.id;
-    }
 
     @Override
     public int hashCode() {
@@ -153,4 +146,6 @@ public class User implements UserDetails {
         }
         return false;
     }
+
+
 }
