@@ -2,6 +2,7 @@ package com.devsupeior.dscommerce.controllers;
 
 
 import com.devsupeior.dscommerce.dto.ProductDto;
+import com.devsupeior.dscommerce.dto.ProductMinDto;
 import com.devsupeior.dscommerce.entities.Product;
 import com.devsupeior.dscommerce.repositories.ProductRepository;
 import com.devsupeior.dscommerce.services.ProductService;
@@ -33,8 +34,8 @@ public class ProductController {
 
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> findAll(@RequestParam(name = "name", defaultValue = "") String name,Pageable pageable){
-        Page<ProductDto> productDto = productService.findAll(name, pageable);
+    public ResponseEntity<Page<ProductMinDto>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
+        Page<ProductMinDto> productDto = productService.findAll(name, pageable);
         return ResponseEntity.ok(productDto);
     }
 
